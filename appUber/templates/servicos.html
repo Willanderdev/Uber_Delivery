@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% block content %}
+
+
+<div id="solicite" class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <div class="col-sm-12 col-lg-12">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+                    </div>
+
+                    <div>
+                        <div class="mb-3">
+                            <label class="form-label" for="veiculo">Veículo</label>
+                            <select name="veículo" class="form-select campo" required="" id="serv_veiculos"
+                                onChange="valor()">
+                                <option value="" selected="">---------</option>
+
+                                <option value="1">Moto</option>
+
+                                <option value="2">carro</option>
+
+                                <option value="3">caminhão</option>
+
+                                <option value="4">carreta</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+            <br><br>
+            <div>
+                <h1>Dados de Serviço</h1>
+            </div>
+            <br><br>
+
+            <div class="col-sm-12 col-lg-12">
+                <div class="container">
+                    <div class="row">
+
+                        <form action="{% url 'solicite' %}" method="POST">{% csrf_token %}
+                            <div class="container">
+                                <div class="row">
+                                    
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="id_coleta">Coleta</label>
+                                            <input type="text" name="coleta2" value="{{coleta}}" maxlength="100"
+                                                class="form-control" placeholder="Coleta" id="id_coleta2" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="id_coleta">Entrega</label>
+                                            <input type="text" name="entrega2" value="{{entrega}}" maxlength="100"
+                                                class="form-control" placeholder="Entrega" id="id_entrega2" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="id_coleta">Veículo</label>
+                                            <input type="text" name="" value="{{veiculo}}" maxlength="100"
+                                                class="form-control" placeholder="Veículo" id="id_veiculo2" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="id_coleta">Distancia(percurso)</label>
+                                            <input type="text" name="valor_distancia" value="{{distancia}}"
+                                                maxlength="100" class="form-control" placeholder="Distancia"
+                                                id="id_distancia2" readonly>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="id_coleta">Valor do Serviço</label>
+                                            <input type="text" name="valor" value="{{valor}}" maxlength="100"
+                                                class="form-control" placeholder="valor" id="id_valor2" readonly>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <br>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary">Solicitar
+                                Delivery</button>
+                        </form>
+                       
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Button trigger modal -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+
+
+{% endblock %}

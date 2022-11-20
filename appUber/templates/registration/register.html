@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-12 col-lg-4">
+        </div>
+
+        <div class="col-sm-12 col-lg-4 login">
+            <div class="form form-control login">
+                <form class="form-signin" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <h2 class="card-title text-center">Cadastrar Usuario</h2>
+                    <br>
+                    <input type="hidden" name="next" value="{{next}}">
+                     {% bootstrap_form form %}
+
+                    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                    <br><br>
+                    <!-- Register buttons -->
+                    <div class="text-center">
+
+                        <button type="button" class="btn btn-primary btn-floating mx-1">
+                            <i class="lni lni-linkedin-original"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-floating mx-1">
+                            <i class="lni lni-github-original"></i>
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-lg-4">
+        </div>
+    </div>
+</div>
+
+{% endblock %}
