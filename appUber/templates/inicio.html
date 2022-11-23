@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% load static %}
+
+{% block content %}
+
+
+<nav class="navbar navbar-default">
+    <a class="navbar-brand" href="#">DjangoUber</a>
+
+    <div id="navbarNav">
+        <ul class="nav me-auto">
+            <li>
+                <a class="nav-item nav-link" href="#">{{user.username}}</a>
+            </li>
+            <li>
+                <a class="nav-item nav-link" href="{% url 'login' %}">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+
+    {% if user.is_anonymous %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12 index" align="center">
+                <h1>Controle de Estoque</h1>
+                <br>
+                <h4>Você não estar logado</h4>
+                <br><br>
+                <a class="btn btn-primary" href="{% url 'login' %}">Fazer Login</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <br>
+    <div class="alert alert-primary" role="alert">
+        seja bem vindo {{ user.username }}!
+    </div>
+    <div id="servicos" class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-12">
+                <div class="col-sm-12 col-lg-12">
+                    <nav class="navbar navbar-default">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+                        </div>
+
+                        <div>
+                            <ul class="nav">
+                                <button type="button" class="btn  btn-mostrar"
+                                    onclick="Mudarestado('tabela')">Delivery</button>
+                            </ul>
+
+                        </div>
+
+                    </nav>
+                </div>
+                <br><br>
+                <div>
+                    <h1>Dados de Localização</h1>
+                </div>
+                <br><br>
+
+                <div class="col-sm-12 col-lg-12">
+                     <!-- onsubmit="debug(event)" nao carrega a page -->
+                    <form action="#" method="POST" autocomplete="off" enctype="multipart/form-data">
+                        {%csrf_token %}
+                        <div id="tabela">
+                            <label for="exampleDataList" id="lable" class="form-label">Endereço de COLETA</label>
+                            <div class="autocomplete-container" id="autocomplete-container" id="auto0">
+
+                                <div class="input-container" id="auto1">
+                                    <input class="form-control" type="text" name="nome" id="auto2">
+                                </div>
+                                <br>
+                                <a type="#" class="btn btn-outline-success" onclick="carregar()" href="#">Ok</a>
+                                <br>
+                                <br>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-3"> 
+                                            <div class="mb-3">
+                                                <label class="form-label" for="id_servicos">Servicos</label><select
+                                                    name="servicos" class="form-select" required="" id="id_servicos">
+                                                    <option value="" selected="">---------</option>
+
+                                                    <option value="viagem">viagem</option>
+
+                                                    <option value="delivery">delivery</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-9">
+                                            <label class="form-label" for="id_coleta">Coleta</label>
+                                            <input type="text"
+                                                name="coleta" maxlength="100" class="form-control" placeholder="Coleta"
+                                                required="" id="id_coleta">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="id_entrega">Entrega</label><input
+                                                    type="text" name="entrega" maxlength="100" class="form-control"
+                                                    placeholder="Entrega" required="" id="id_entrega">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="id_veiculo">Veiculo</label>
+                                                <select name="veiculo" class="form-select" id="id_veiculo">
+                                                    <option value="" selected="">---------</option>
+
+                                                    <option value="moto">moto</option>
+
+                                                    <option value="carro">carro</option>
+
+                                                    <option value="caminhao">caminhão</option>
+
+                                                    <option value="carreta">carreta</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-success" type="submit">Enviar</button>
+                        </div>
+                </div>
+                <br>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+{% endif %}
+</div>
+
+{% endblock %}

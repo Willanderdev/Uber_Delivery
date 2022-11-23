@@ -82,9 +82,11 @@
                 <button form="my-form" type="submit" class="btn btn-secondary">Update</button>
             </div>
             <br>
+            
             <div class="form-group">
-                <a href="delete/{{servico.id}}" form="my-form" type="submit" class="btn btn-danger">Delete</a>
+                <a href="{% url 'del_servico' pk=servicos.id %}" form="my-form" type="submit" class="btn btn-danger">Delete</a>
             </div>
+            
 
         </div>
 

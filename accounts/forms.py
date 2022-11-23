@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -15,6 +15,8 @@ class ColaboradorForm(UserCreationForm):
     cpf = forms.IntegerField(label='cpf', required=True)
     veículo = forms.ChoiceField(
         label='Veículo', choices=veículos, required=True)
+    
+    
 
     class Meta:
         model = User

@@ -9,3 +9,4 @@ from .models import Servicos
 @admin.register(Servicos)
 class ServicosAdmin(admin.ModelAdmin):
     list_display = ('servicos', 'coleta', 'entrega','veiculo')
+    

@@ -71,35 +71,35 @@ def Solicite(request):
     return render(request, 'solicite.html')
 
 
-def Profile(request):
-    form = Formendereço()
+# def Profile(request):
+#     form = Formendereço()
 
-    context = {
-        'servicos': Servicos.objects.all(),
-        'total': Servicos.objects.all().count(),
-        'pending':  Servicos.objects.all().filter(status='Pending')
-    }
+#     context = {
+#         'servicos': Servicos.objects.all(),
+#         'total': Servicos.objects.all().count(),
+#         'pending':  Servicos.objects.all().filter(status='Pending')
+#     }
 
-    return render(request, 'profile.html', context)
-
-
-def Editar(request, id):
-    servico = get_object_or_404(Servicos, pk=id)
-    form = Formendereço(instance=servico)
-
-    if (request.method == 'POST'):
-        form = Formendereço(request.POST, instance=servico)
-        if (form.is_valid()):
-            servico.save()
-            return redirect('profile')
-    else:
-        return render(request, 'update.html', {"servico": servico, "form": form})
+#     return render(request, 'profile.html', context)
 
 
-def Delete(request, id):
-    produto = get_object_or_404(Servicos, pk=id)
-    produto.delete()
-    return redirect('profile')
+# def Editar(request, id):
+#     servico = get_object_or_404(Servicos, pk=id)
+#     form = Formendereço(instance=servico)
+
+#     if (request.method == 'POST'):
+#         form = Formendereço(request.POST, instance=servico)
+#         if (form.is_valid()):
+#             servico.save()
+#             return redirect('profile')
+#     else:
+#         return render(request, 'update.html', {"servico": servico, "form": form})
+
+
+# def Delete(request, id):
+#     produto = get_object_or_404(Servicos, pk=id)
+#     produto.delete()
+#     return redirect('profile')
 
 
 

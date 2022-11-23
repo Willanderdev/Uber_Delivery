@@ -1,6 +1,6 @@
 from django.db import models
-from django.db.models import signals
-from django.template.defaultfilters import slugify
+
+from django.contrib.auth import get_user_model
 
 VEICULO = [
     ('moto', 'moto'),
@@ -19,6 +19,7 @@ STATUS = [
 ]
 
 class Servicos(models.Model):
+    # colaborador = models.ForeignKey(get_user_model(), verbose_name='colaborador', on_delete=models.CASCADE)
     servicos = models.CharField('servicos', max_length=10, choices=SERVICOS)
     coleta = models.CharField('coleta', max_length=100)
     entrega = models.CharField('entrega', max_length=100)

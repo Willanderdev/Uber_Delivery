@@ -120,17 +120,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {%for i in servicos %}
+                        {% for i in servicos %}
                         <tr>
                             <th scope="row">{{i.id}}</th>
-                            <td><a href="{% url 'editar' i.id %}">{{i.servicos}}</a></td>
+                            <td><a href="{% url 'up_servico' i.id %}">{{i.servicos}}</a></td>
                             <td>{{i.veiculo}}</td>
                             <td>{{i.distancia}} m</td>
                             <td>{{i.valor}}</td>
                             <td>{{i.time}}</td>
                             <td>{{i.status}}</td>
                         </tr>
-                        {%endfor%}
+                        {% endfor %}
                     </tbody>
                 </table>
 
