@@ -5,7 +5,6 @@
 
 {% block content %}
 
-
 <nav class="navbar navbar-default">
     <a class="navbar-brand" href="#">CloudUber</a>
 
@@ -13,7 +12,7 @@
         <ul class="nav me-auto">
 
             <li>
-                <a class="nav-item nav-link" href="#">{{user.username}}</a>
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
             </li>
             <li>
                 <a class="nav-item nav-link" href="{% url 'login' %}">Logout</a>

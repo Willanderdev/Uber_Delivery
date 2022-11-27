@@ -14,12 +14,12 @@
                 <form class="form-signin" method="post" autocomplete="off">
                     {% csrf_token %}
                     <h2 class="card-title text-center">Login</h2>
-                    <input type="hidden" name="next" value="{{next}}">
+                    <!-- <input type="hidden" name="next" value="{{next}}"> -->
                     {% bootstrap_form form %}
 
                     <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                     <br><br>
-                    <!-- Register buttons -->
+
                     <div class="text-center">
                         <p>Crie sua Conta.<a href="{% url 'signup' %}">Conta</a></p>
                         <p>Quer trabalhar conosco?<a href="{% url 'colaborador' %}">Cadastre-se</a></p>

@@ -5,9 +5,12 @@ from .forms import Formendereço
 from django.contrib import messages
 from .models import Servicos
 from .coordenadas import coord, distancia, valor, Servidor, momento
+from django.contrib.auth.models import User, Group
 
 
 def Index(request):
+    if request.user.groups == 'Colaborador':
+        return redirect('profile')
     if str(request.method) == 'POST':
         form = Formendereço(request.POST, request.FILES)
         if form.is_valid():
@@ -34,7 +37,7 @@ def Index(request):
 
             # salvando dados acrescentando distancia no bd Servicos.
             b = Servicos(servicos=context['form']['servicos'].value(), coleta=context['form']['coleta'].value(
-            ), entrega=context['form']['entrega'].value(), time=momento(), veiculo=context['form']['veiculo'].value(), distancia=dist, valor=value, status='Pending')
+            ), entrega=context['form']['entrega'].value(), time=momento(), veiculo=context['form']['veiculo'].value(), distancia=dist, valor=value, status='Waiting')
             
             b.save()
 
@@ -59,13 +62,22 @@ def Servico(request):
         'distancia': corrida.distancia,
         'valor': corrida.valor
     }
+    
     if request.method == 'POST':
+        b = corrida
+        b.status = 'Pending'
+        b.save()
         return redirect('solicite')
         
     return render(request, 'servicos.html', context)
 
 
 def Solicite(request):
+    corrida = Servicos.objects.all()
+    corrida = corrida[len(corrida)-1]
+    b = corrida
+    b.status = 'Pending'
+    b.save()
     # if request.method == 'POST':
     #     Servidor()
     return render(request, 'solicite.html')

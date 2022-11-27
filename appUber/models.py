@@ -14,6 +14,7 @@ SERVICOS = [('viagem', 'viagem'),
             ]
 
 STATUS = [
+    ('Waiting', 'Waiting'),
     ('Pending', 'Pending'),
     ('Accepted', 'Accepted')
 ]
@@ -28,7 +29,7 @@ class Servicos(models.Model):
     veiculo = models.CharField('veiculo', max_length=10, choices=VEICULO)
     valor = models.DecimalField('valor', blank=True, max_digits=15, decimal_places=2)
     status = models.CharField('status', max_length=15,
-                              blank=True, choices=STATUS)
+                              blank=True, null=True, choices=STATUS)
 
     class Meta:
         ordering = ['id']
