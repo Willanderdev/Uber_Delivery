@@ -9,6 +9,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('appUber.urls')),
-    path('', include('accounts.urls')),
-    path('usuarios/', include('django.contrib.auth.urls')),
+    path('contas/', include('accounts.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

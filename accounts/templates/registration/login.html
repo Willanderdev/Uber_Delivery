@@ -11,7 +11,7 @@
 
         <div class="col-sm-12 col-lg-4 login">
             <div class="form form-control">
-                <form class="form-signin" method="post" autocomplete="off">
+                <form class="form-signin" method="post" autocomplete="none">
                     {% csrf_token %}
                     <h2 class="card-title text-center">Login</h2>
                     <!-- <input type="hidden" name="next" value="{{next}}"> -->
@@ -21,8 +21,8 @@
                     <br><br>
 
                     <div class="text-center">
-                        <p>Crie sua Conta.<a href="{% url 'signup' %}">Conta</a></p>
-                        <p>Quer trabalhar conosco?<a href="{% url 'colaborador' %}">Cadastre-se</a></p>
+                        
+                        <p>Crie sua conta!<a href="{% url 'register' %}"> Cadastre-se</a></p>
                         <p>or sign up with:</p>
 
                         <button type="button" class="btn btn-primary btn-floating mx-1">

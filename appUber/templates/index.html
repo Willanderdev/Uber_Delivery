@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    {% else %}
+    {% elif user.tipo == 'usuario' or user.is_staff == True %}
     <br>
     <div class="alert alert-primary" role="alert">
         seja bem vindo {{ user.username }}!
@@ -145,6 +145,10 @@
 
         </div>
 
+        {% elif user.tipo == 'colaborador' %}
+         <div class="alert alert-primary" role="alert">
+        seja bem vindo {{ user.username }}!
+    </div>
 
     </div>
 </div>
@@ -154,57 +158,3 @@
 
 {% endblock %}
 
-<!-- context['form']['coleta'].value()) -->
-
-
-
-
-<!-- 
-from django.shortcuts import render
-from .forms import Formendereço
-from django.contrib import messages
-from .models import Servicos
-
-
-def Index(request):
-if str(request.method) == 'POST':
-form = Formendereço(request.POST, request.FILES)
-if form.is_valid():
-form.save()
-
-else:
-messages.success(request, 'erro')
-else:
-form = Formendereço()
-context = {
-'form': form
-}
-print(context['form']['coleta'].value())
-return render(request, 'index.html', context)
-
-
-def Servico(request):
-context = {
-'servicos': Servicos.objects.all()
-
-}
-return render(request, 'servico.html', context)
-
-
-
-
-
-list1 = []
-# coleta = context['form']['coleta'].value()
-# entrega = context['form']['entrega'].value()
-# list1.append(coleta)
-# list1.append(entrega)
-
-# print(Serviço.objects.all())
-# coordenadas = []
-
-# for i in range(len(list1)):
-# c = coord(list1[i-1])
-# coordenadas.append(c)
-
-# dist = distancia(coordenadas) -->

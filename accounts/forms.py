@@ -1,23 +1,27 @@
-from django import forms
-from django.contrib.auth.models import User, Group
+# coding=utf-8
+
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+
+from .models import User
 
 
-veículos = [
-    (1, 'Moto'),
-    (2, 'carro'),
-    (3, 'caminhão'),
-    (4, 'carreta')
-]
-
-
-class ColaboradorForm(UserCreationForm):
-    cpf = forms.IntegerField(label='cpf', required=True)
-    veículo = forms.ChoiceField(
-        label='Veículo', choices=veículos, required=True)
-    
-    
+class UserAdminCreationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'cpf', 'veículo', 'password1', 'password2']
+        fields = ['username', 'email', 'tipo']
+
+
+class UserAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'name',
+                  'image', 'is_active', 'is_staff']
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'image', 'name']

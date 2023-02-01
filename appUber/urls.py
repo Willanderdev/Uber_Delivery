@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', Index, name='index'),
-    path('usuarios', include('django.contrib.auth.urls')),
+    path('usuarios/', include('django.contrib.auth.urls')),
     path('servicos', Servico, name='servicos'),
     path('solicite', Solicite, name='solicite'),
     # path('profile', Profile, name='profile'),
