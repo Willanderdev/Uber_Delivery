@@ -13,6 +13,13 @@ class User(AbstractBaseUser, PermissionsMixin):
           ('usuario', 'usuario'),
           ('colaborador', 'colaborador')
       )
+    
+    veículos = (
+        ('moto', 'moto'),
+        ('carro', 'carro'),
+        ('caminhão', 'caminhão'),
+        ('carreta', 'carreta')
+    )
 
     username = models.CharField(
         'Apelido / Usuário', max_length=30, unique=True, validators=[
@@ -25,8 +32,10 @@ class User(AbstractBaseUser, PermissionsMixin):
             )
         ], help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma'
     )
-    tipo = models.CharField('tipo_de_usuario', choices=Tipo_de_user, max_length=20, default='usuario')
-    
+    tipo = models.CharField(
+        'tipo_de_usuario', choices=Tipo_de_user, max_length=20, default='usuario')
+    veículo = models.CharField(
+        'veículo', choices=veículos, max_length=20, default='')
     name = models.CharField('Nome', max_length=100, blank=True)
     email = models.EmailField('E-mail', unique=True)
     image = models.ImageField(

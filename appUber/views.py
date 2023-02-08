@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
-from .forms import Formendereço
+from .forms import Formendereço, Formsolicitação
 from django.contrib import messages
-from .models import Servicos
-from .coordenadas import coord, distancia, valor, Servidor, momento
+from .models import Servicos, Sol_Servicos
+from .coordenadas import coord, distancia, valor, Servidor, momento, decimalconverter
 from django.contrib.auth.models import User, Group
+from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url='usuarios/login/')
 def Index(request):
-    if request.user.groups == 'Colaborador':
-        return redirect('profile')
+
     if str(request.method) == 'POST':
         form = Formendereço(request.POST, request.FILES)
         if form.is_valid():
@@ -29,16 +32,17 @@ def Index(request):
             coordenadas = []
 
             for i in range(len(list1)):
-                
+
                 c = coord(list1[i-1])
                 coordenadas.append(c)
             dist = distancia(coordenadas)
+
             value = valor(dist, veiculo)
 
             # salvando dados acrescentando distancia no bd Servicos.
             b = Servicos(servicos=context['form']['servicos'].value(), coleta=context['form']['coleta'].value(
             ), entrega=context['form']['entrega'].value(), time=momento(), veiculo=context['form']['veiculo'].value(), distancia=dist, valor=value, status='Waiting')
-            
+
             b.save()
 
             return redirect('servicos')
@@ -50,6 +54,7 @@ def Index(request):
     return render(request, 'index.html')
 
 
+@login_required(login_url='usuarios/login/')
 def Servico(request):
     corrida = Servicos.objects.all()
     corrida = corrida[len(corrida)-1]
@@ -62,58 +67,30 @@ def Servico(request):
         'distancia': corrida.distancia,
         'valor': corrida.valor
     }
-    
-    if request.method == 'POST':
-        b = corrida
-        b.status = 'Pending'
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+
+        coleta = request.POST.get("coleta2")
+        entrega = request.POST.get("entrega2")
+        veiculo = request.POST.get("veiculo2")
+
+        distancia = request.POST.get("valor_distancia")
+
+        distancia2 = decimalconverter(distancia)
+
+        valor = request.POST.get("valor")
+        valor2 = decimalconverter(valor)
+
+        b = Sol_Servicos(servicos=corrida.servicos, coleta=coleta, entrega=entrega, time=momento(
+        ), veiculo=veiculo, distancia=distancia2, valor=valor2, status='Pending')
+
         b.save()
-        return redirect('solicite')
-        
+        return JsonResponse({"message": "success"})
+        # return redirect('Solicite')
+
     return render(request, 'servicos.html', context)
 
 
-def Solicite(request):
-    corrida = Servicos.objects.all()
-    corrida = corrida[len(corrida)-1]
-    b = corrida
-    b.status = 'Pending'
-    b.save()
-    # if request.method == 'POST':
-    #     Servidor()
-    return render(request, 'solicite.html')
+class Solicite(TemplateView):
 
-
-# def Profile(request):
-#     form = Formendereço()
-
-#     context = {
-#         'servicos': Servicos.objects.all(),
-#         'total': Servicos.objects.all().count(),
-#         'pending':  Servicos.objects.all().filter(status='Pending')
-#     }
-
-#     return render(request, 'profile.html', context)
-
-
-# def Editar(request, id):
-#     servico = get_object_or_404(Servicos, pk=id)
-#     form = Formendereço(instance=servico)
-
-#     if (request.method == 'POST'):
-#         form = Formendereço(request.POST, instance=servico)
-#         if (form.is_valid()):
-#             servico.save()
-#             return redirect('profile')
-#     else:
-#         return render(request, 'update.html', {"servico": servico, "form": form})
-
-
-# def Delete(request, id):
-#     produto = get_object_or_404(Servicos, pk=id)
-#     produto.delete()
-#     return redirect('profile')
-
-
-
-
-
+    template_name = 'solicite.html'

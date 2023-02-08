@@ -125,4 +125,8 @@ def momento():
 
 
     
+def decimalconverter(valor):
+    numero = valor.replace(',', '.')
+    numero2 = float(numero)
+    return numero2
     

@@ -39,40 +39,44 @@ function carregar() {
   }
 }
 //----------------------------------------------------------------------------------------------
+//função que muda veículo e atribui valor de serviço de acordo com o veículo na solicitação de serviço
+
 function valor() {
 
   var select = document.getElementById('serv_veiculos');
   var option = select.options[select.selectedIndex];
   let distancia = document.querySelector("[name='valor_distancia']").value;
   // let valor = document.querySelector("[name='valor']").value;
-  
-  document.getElementById('id_veiculo2').value = option.value;
-  let veiculo = document.getElementById('id_veiculo2').value;
-  
 
-  if (veiculo == '1') {
+  document.getElementById('id_veiculo2').value = option.innerHTML;
+
+  let veiculo = document.getElementById('id_veiculo2').value;
+  console.log(veiculo)
+
+
+  if (veiculo == 'moto') {
     let val_km = 8;
     let val_serv = val_km * (parseInt(distancia) / 1000)
-    console.log(val_serv)
+
     document.querySelector("[name='valor']").value = val_serv;
 
   }
-  else if (veiculo == '2') {
+  else if (veiculo == 'carro') {
     let val_km = 15;
     let val_serv = val_km * (parseInt(distancia) / 1000);
-    console.log(val_serv)
+
     document.querySelector("[name='valor']").value = val_serv;
   }
-  else if (veiculo == '3') {
+  else if (veiculo == 'caminhão') {
     let val_km = 30;
     let val_serv = val_km * (parseInt(distancia) / 1000);
-    console.log(val_serv)
+
     document.querySelector("[name='valor']").value = val_serv;
   }
   else {
     let val_km = 60;
     let val_serv = val_km * (parseInt(distancia) / 1000);
-    console.log(val_serv)
+
     document.querySelector("[name='valor']").value = val_serv;
   }
 }
@@ -359,6 +363,21 @@ $(document).ready(function () {
 function debug(e) {
   e.preventDefault();
 };
+
+
+//mostra o campo veículo no cadastro de usuario caso o usuario seja colaborador
+function Veiculo() {
+
+  var select = document.getElementById('id_tipo').selectedIndex;
+
+  if (select == 1) {
+    document.getElementById('veiculo_none').style.display = "block";
+  }
+  else {
+    document.getElementById('veiculo_none').style.display = "none";
+  }
+}
+
 
 
 

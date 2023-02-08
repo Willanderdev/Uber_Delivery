@@ -6,7 +6,7 @@
 {% block content %}
 
 <nav class="navbar navbar-default">
-    <a class="navbar-brand" href="#">CloudUber</a>
+    <a class="navbar-brand" href="#">Django Uber</a>
 
     <div id="navbarNav">
         <ul class="nav me-auto">
@@ -15,7 +15,7 @@
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
             </li>
             <li>
-                <a class="nav-item nav-link" href="{% url 'login' %}">Logout</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-12 index" align="center">
-                <h1>Controle de Estoque</h1>
+                <h1>Django Delivery</h1>
                 <br>
                 <h4>Você não estar logado</h4>
                 <br><br>
@@ -66,7 +66,7 @@
                 <br><br>
 
                 <div class="col-sm-12 col-lg-12">
-                     <!-- onsubmit="debug(event)" nao carrega a page -->
+                    <!-- onsubmit="debug(event)" nao carrega a page -->
                     <form action="#" method="POST" autocomplete="off" enctype="multipart/form-data">
                         {%csrf_token %}
                         <div id="tabela">
@@ -82,7 +82,7 @@
                                 <br>
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-3"> 
+                                        <div class="col-3">
                                             <div class="mb-3">
                                                 <label class="form-label" for="id_servicos">Servicos</label><select
                                                     name="servicos" class="form-select" required="" id="id_servicos">
@@ -99,9 +99,8 @@
 
                                         <div class="col-9">
                                             <label class="form-label" for="id_coleta">Coleta</label>
-                                            <input type="text"
-                                                name="coleta" maxlength="100" class="form-control" placeholder="Coleta"
-                                                required="" id="id_coleta">
+                                            <input type="text" name="coleta" maxlength="100" class="form-control"
+                                                placeholder="Coleta" required="" id="id_coleta">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -129,26 +128,26 @@
                                                 </select>
                                             </div>
                                         </div>
-                                       
+
                                     </div>
                                 </div>
                             </div>
                             <button class="btn btn-outline-success" type="submit">Enviar</button>
                         </div>
+                    </form>
                 </div>
                 <br>
 
 
-                </form>
 
             </div>
 
         </div>
 
         {% elif user.tipo == 'colaborador' %}
-         <div class="alert alert-primary" role="alert">
-        seja bem vindo {{ user.username }}!
-    </div>
+        <div class="alert alert-primary" role="alert">
+            seja bem vindo {{ user.username }}!
+        </div>
 
     </div>
 </div>
@@ -157,4 +156,3 @@
 </div>
 
 {% endblock %}
-

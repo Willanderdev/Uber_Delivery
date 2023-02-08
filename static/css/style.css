@@ -153,3 +153,9 @@ body {
 .clear-button:hover {
   color: rgba(0, 0, 0, 0.6);
 }
+
+/* esconder campo veículo do cadastro de colaborador */
+
+#veiculo_none {
+  display: none;
+}

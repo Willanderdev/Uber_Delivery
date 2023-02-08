@@ -12,7 +12,7 @@ class UserAdmin(BaseUserAdmin):
     add_form = UserAdminCreationForm
     add_fieldsets = (
         (None, {
-            'fields': ('username', 'image', 'email', 'password1', 'password2')
+            'fields': ('username', 'image', 'veículo', 'email', 'password1', 'password2')
         }),
     )
     form = UserAdminForm
@@ -21,7 +21,7 @@ class UserAdmin(BaseUserAdmin):
             'fields': ('username', 'image', 'email')
         }),
         ('Informações Básicas', {
-            'fields': ('name', 'last_login')
+            'fields': ('name', 'veículo', 'last_login')
         }),
         (
             'Permissões', {
@@ -32,7 +32,7 @@ class UserAdmin(BaseUserAdmin):
             }
         ),
     )
-    list_display = ['username', 'image', 'email',
+    list_display = ['username', 'image', 'email', 'tipo', 'veículo',
                     'is_active', 'is_staff', 'date_joined']
 
 

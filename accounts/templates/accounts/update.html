@@ -21,60 +21,14 @@
         </div>
         <br><br>
         <div class="col-4">
-            <form id="my-form" action="#" method="POST" class="form" autocomplete="off" enctype="multipart/form-data">
+            <form id="my-form" action="#" method="POST" class="form" autocomplete="off"
+                enctype="multipart/form-data">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                {% comment %} <input type="hidden" name="csrfmiddlewaretoken"
-                    value="SmcsBE8oXoFdegQAvpWZ7McKo1HJa0yvE5nYxgrq1r4d6b5wlhlBHJfaBZOOtrid">
-                <div class="mb-3">
-                    <label class="form-label" for="id_servicos">Servicos</label>
-                    <select name="servicos" class="form-select" required="" id="id_servicos">
-                        <option value="">---------</option>
 
-                        <option value="viagem">viagem</option>
+            </form> 
 
-                        <option value="delivery" selected="">delivery</option>
-
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="id_coleta">Coleta</label>
-                    <input type="text" name="coleta" value="{{servico.coleta}}" maxlength="100" class="form-control"
-                        placeholder="Coleta" required="" id="id_coleta">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="id_entrega">Entrega</label>
-                    <input type="text" name="entrega" value="{{servico.entrega}}" maxlength="100" class="form-control"
-                        placeholder="Entrega" required="" id="id_entrega">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="id_veiculo">Veiculo</label>
-                    <select name="veiculo" class="form-select" required="" id="id_veiculo">
-                        <option value="">---------</option>
-
-                        <option value="moto">moto</option>
-
-                        <option value="carro">carro</option>
-
-                        <option value="caminhao">caminhão</option>
-
-                        <option value="carreta">carreta</option>
-
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="id_status">Status</label>
-                    <select name="status" class="form-select" value="" required="" id="id_status">
-                        <option value="">---------</option>
-
-                        <option value="Pending">Pending</option>
-
-                        <option value="accepted">accepted</option>
-
-                    </select>
-                </div> {% endcomment %}
-
-            </form>
+            
         </div>
         <div class="offset-6 col-2">
 
@@ -82,11 +36,12 @@
                 <button form="my-form" type="submit" class="btn btn-secondary">Update</button>
             </div>
             <br>
-            
+
             <div class="form-group">
-                <a href="{% url 'del_servico' pk=servicos.id %}" form="my-form" type="submit" class="btn btn-danger">Delete</a>
+                <a href="{% url 'del_servico' pk=servicos.id %}" form="my-form" type="submit"
+                    class="btn btn-danger">Delete</a>
             </div>
-            
+
 
         </div>
 

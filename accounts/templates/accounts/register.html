@@ -3,6 +3,7 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
+
 <div class="container">
     <div class="row">
 
@@ -11,11 +12,86 @@
 
         <div class="col-sm-12 col-lg-4 login">
             <div class="form form-control login">
-                <form class="form-signin" method="post" autocomplete="off">
+                <!-- <form class="form-signin" method="post" autocomplete="off">
                     {% csrf_token %}
-                    <h2 class="card-title text-center">Colaborador</h2>
+                    <h2 class="card-title text-center">Si</h2>
                     <input type="hidden" name="next" value="{{next}}">
-                     {% bootstrap_form form %}
+                  //{% bootstrap_form form %} 
+
+                    <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                    <br>
+                  Register buttons
+                    <div class="text-center">
+
+                        <button type="button" class="btn btn-primary btn-floating mx-1">
+                            <i class="lni lni-linkedin-original"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-primary btn-floating mx-1">
+                            <i class="lni lni-github-original"></i>
+                        </button>
+
+                    </div>
+                </form> -->
+                <form class="form-signin register" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <h2 class="card-title text-center">Signup</h2>
+                    <input type="hidden" name="next" value="">
+                    <div class="mb-3">
+                        <label class="form-label" for="id_username">Apelido / Usuário</label><input type="text"
+                            name="username" maxlength="30" autofocus="" class="form-control"
+                            placeholder="Apelido / Usuário" required="" id="id_username">
+                        <div class="form-text">Um nome curto que será usado para identificá-lo de forma única na
+                            plataforma</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="id_email">E-mail</label><input type="email" name="email"
+                            maxlength="254" class="form-control" placeholder="E-mail" required="" id="id_email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="id_tipo">Tipo_de_usuario</label>
+                        <select name="tipo" class="form-select" id="id_tipo" onclick="Veiculo()">
+                            <option value="usuario" selected="">usuario</option>
+
+                            <option value="colaborador">colaborador</option>
+
+                        </select>
+                    </div>
+                    <div class="mb-3" id="veiculo_none">
+                        <label class="form-label" for="id_veículo">Veículo</label>
+                        <select name="veículo" class="form-select" id="id_veículo">
+
+
+                            <option value="" selected="">---------</option>
+
+                            <option value="moto">moto</option>
+
+                            <option value="carro">carro</option>
+
+                            <option value="caminhão">caminhão</option>
+
+                            <option value="carreta">carreta</option>
+
+                        </select>
+                    </div>
+                    <div class="mb-3"><label class="form-label" for="id_password1">Senha</label><input type="password"
+                            name="password1" autocomplete="new-password" class="form-control" placeholder="Senha"
+                            required="" id="id_password1">
+                        <div class="form-text">
+                            <ul>
+                                <li>Sua senha não pode ser muito parecida com o resto das suas informações pessoais.
+                                </li>
+                                <li>Sua senha precisa conter pelo menos 8 caracteres.</li>
+                                <li>Sua senha não pode ser uma senha comumente utilizada.</li>
+                                <li>Sua senha não pode ser inteiramente numérica.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mb-3"><label class="form-label" for="id_password2">Confirmação de senha</label><input
+                            type="password" name="password2" autocomplete="new-password" class="form-control"
+                            placeholder="Confirmação de senha" required="" id="id_password2">
+                        <div class="form-text">Informe a mesma senha informada anteriormente, para verificação.</div>
+                    </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Registrar</button>
                     <br>
@@ -41,4 +117,32 @@
     </div>
 </div>
 
+
 {% endblock %}
+
+<div class="form-row field-veículo">
+
+
+    <div>
+
+
+        <label for="id_veículo">Veículo:</label>
+
+        <select name="veículo" id="id_veículo">
+            <option value="" selected="">---------</option>
+
+            <option value="moto">moto</option>
+
+            <option value="carro">carro</option>
+
+            <option value="caminhão">caminhão</option>
+
+            <option value="carreta">carreta</option>
+
+        </select>
+
+
+
+    </div>
+
+</div>

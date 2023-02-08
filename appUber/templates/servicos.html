@@ -44,10 +44,10 @@
                 <div class="container">
                     <div class="row">
 
-                        <form action="{% url 'solicite' %}" method="POST">{% csrf_token %}
+                        <form id = "form" action="{% url 'servicos'  %}" method="POST" autocomplete="off" enctype="multipart/form-data">{% csrf_token %}
                             <div class="container">
                                 <div class="row">
-                                    
+
                                     <div class="col-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="id_coleta">Coleta</label>
@@ -68,7 +68,7 @@
                                     <div class="col-4">
                                         <div class="mb-3">
                                             <label class="form-label" for="id_coleta">Veículo</label>
-                                            <input type="text" name="" value="{{veiculo}}" maxlength="100"
+                                            <input type="text" name="veiculo2" value="{{veiculo}}" maxlength="100"
                                                 class="form-control" placeholder="Veículo" id="id_veiculo2" readonly>
                                         </div>
                                     </div>
@@ -90,47 +90,69 @@
                                                 class="form-control" placeholder="valor" id="id_valor2" readonly>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <br>
 
                             </div>
-                            <button type="submit" class="btn btn-primary">Solicitar
+                            <button type="submit" class="btn btn-primary btnSave" data-toggle="modal" data-target="#vendedorModal">Solicitar
                                 Delivery</button>
                         </form>
-                       
+
                     </div>
                 </div>
             </div>
 
-        </div>
-        <!-- Button trigger modal -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
         </div>
        
     </div>
+    {% include "solicite.html" %}
 </div>
+<!-- Button trigger modal -->
 
+<script>
+    $("#form").on("submit", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $this = $(this);
 
+        var valid = true;
+        $('#form input').each(function () {
+            let $this = $(this);
+
+            if (!$this.val()) {
+                valid = false;
+                alert('peencha os campos')
+                //$this.parents('.validate').find('.mySpan').text('The ' + $this.attr('name').replace(/[\_]+/g, ' ') + ' field is required');
+            }
+        });
+
+        if (valid) {
+            $(".btnSave").text('Solicitação de serviço enviada...').attr('disabled', true);
+            let data = $this.serialize();
+            $.ajax({
+                url: $this.attr("action"),
+                type: "POST",
+                data: data,
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.message == "success") {
+                        
+                        $("#form")[0].reset();
+                    }
+                    else {
+                        alert(resp.message);
+                    }
+                    $(".btnSave").text('Aguarde sua solicitação ser aceita...').attr('disabled', false);
+                },
+                error: function (resp) {
+                    console.log("Something went wrong");
+                    $(".btnSave").text('Save').attr('disabled', false);
+                }
+            });
+        }
+        return false;
+    });
+</script>
 
 {% endblock %}
